@@ -5,7 +5,7 @@ import { AppPaths } from "../types/app.paths";
 
 export const LogoutFloatButton = () => {
   return (
-    <Link to={AppPaths.LOGIN}>
+    <Link to={AppPaths.SIGN}>
       <Fab
         onClick={() => console.log("clicked")}
         color="primary"

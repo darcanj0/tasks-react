@@ -1,13 +1,14 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { HomePage } from "../pages/Home";
-import { LoginPage } from "../pages/Login";
+import { SignPage } from "../pages/Login";
+import { AppPaths } from "../types/app.paths";
 
 export const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/" element={<HomePage />} />
+        <Route path={AppPaths.SIGN} element={<SignPage />} />
+        <Route path={AppPaths.HOME} element={<HomePage />} />
       </Routes>
     </BrowserRouter>
   );

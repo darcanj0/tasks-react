@@ -1,9 +1,10 @@
+import { SignForm } from "../components/sign.form";
 import { DefaultContainer } from "../container/default-container";
 
-export const LoginPage = () => {
+export const SignPage = () => {
   return (
     <DefaultContainer>
-      <h1>Login</h1>
+      <SignForm></SignForm>
     </DefaultContainer>
   );
 };
