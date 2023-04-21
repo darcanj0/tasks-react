@@ -1,6 +1,7 @@
 import { Box, Modal, SxProps } from "@mui/material";
 import { useTab } from "../contexts/tab.context";
 import { TabIndexes } from "../types/tab-indexes";
+import { CreateTaskModal } from "../components/modals/create-task.modal";
 
 export interface TasksTabProps {
   openModal: boolean;
@@ -19,10 +20,16 @@ export const TasksTab = ({ openModal, onCloseModal }: TasksTabProps) => {
     alignItems: "center",
   };
 
+  const modalCss: SxProps = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  };
+
   return tabValue === TabIndexes.TASKS ? (
     <>
-      <Modal open={openModal} onClose={() => onCloseModal()}>
-        <h1>Olá outro modal</h1>
+      <Modal sx={modalCss} open={openModal} onClose={() => onCloseModal()}>
+        <CreateTaskModal />
       </Modal>
       <Box sx={css}>
         <h1>Tasks</h1>

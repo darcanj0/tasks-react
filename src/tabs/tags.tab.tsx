@@ -45,17 +45,15 @@ export const TagsTab = ({ openModal, onCloseModal }: TagsTabProps) => {
     gap: "20px",
   };
 
+  const modalCss: SxProps = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  };
+
   return tabValue === TabIndexes.TAGS ? (
     <>
-      <Modal
-        open={openModal}
-        onClose={() => onCloseModal()}
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+      <Modal open={openModal} onClose={() => onCloseModal()} sx={modalCss}>
         <CreateTagModal />
       </Modal>
       <Box sx={css}>
