@@ -1,7 +1,7 @@
 import { Fab } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
 
-export const AddFloatButton = () => {
+export const LogoutFloatButton = () => {
   return (
     <Fab
       onClick={() => console.log("clicked")}
@@ -9,11 +9,11 @@ export const AddFloatButton = () => {
       aria-label="add"
       sx={{
         position: "absolute",
-        right: 300,
-        bottom: 100,
+        left: 100,
+        top: 80,
       }}
     >
-      <AddIcon />
+      <MeetingRoomIcon />
     </Fab>
   );
 };
