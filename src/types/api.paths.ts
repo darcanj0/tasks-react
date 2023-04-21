@@ -5,4 +5,6 @@ export enum ApiPaths {
   GET_MY_TAGS = "tag",
   CREATE_TAG = "tag",
   CREATE_TASK = "task",
+  DELETE_TASK = "task",
+  DELETE_TAG = "tag"
 }
