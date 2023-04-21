@@ -1,5 +1,5 @@
-import { SignForm as SignUpForm } from "../components/sign-up.form";
-import { DefaultContainer } from "../container/default-container";
+import { SignForm as SignUpForm } from "../components/forms/sign-up.form";
+import { DefaultContainer } from "../containers/default-container";
 
 export const SignUpPage = () => {
   return (

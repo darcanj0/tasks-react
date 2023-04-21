@@ -1,8 +1,13 @@
-import { Box, SxProps } from "@mui/material";
+import { Box, Modal, SxProps } from "@mui/material";
 import { useTab } from "../contexts/tab.context";
 import { TabIndexes } from "../types/tab-indexes";
 
-export const TasksTab = () => {
+export interface TasksTabProps {
+  openModal: boolean;
+  onCloseModal: () => void;
+}
+
+export const TasksTab = ({ openModal, onCloseModal }: TasksTabProps) => {
   const { tabValue } = useTab();
 
   const css: SxProps = {
@@ -16,9 +21,14 @@ export const TasksTab = () => {
   };
 
   return tabValue === TabIndexes.TASKS ? (
-    <Box sx={css}>
-      <h1>Tasks</h1>
-    </Box>
+    <>
+      <Modal open={openModal} onClose={() => onCloseModal()}>
+        <h1>Olá outro modal</h1>
+      </Modal>
+      <Box sx={css}>
+        <h1>Tasks</h1>
+      </Box>
+    </>
   ) : (
     <></>
   );

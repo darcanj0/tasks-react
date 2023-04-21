@@ -1,10 +1,14 @@
 import { Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
-export const AddFloatButton = () => {
+interface AddFloatButton {
+  onclick: () => void;
+}
+
+export const AddFloatButton = ({ onclick }: AddFloatButton) => {
   return (
     <Fab
-      onClick={() => console.log("clicked")}
+      onClick={() => onclick()}
       color="primary"
       aria-label="add"
       sx={{

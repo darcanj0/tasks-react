@@ -2,10 +2,10 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Box, Button, SxProps, TextField, Typography } from "@mui/material";
-import { Api } from "../api/axios";
-import { ApiPaths } from "../types/api.paths";
+import { Api } from "../../api/axios";
+import { ApiPaths } from "../../types/api.paths";
 import { useNavigate } from "react-router-dom";
-import { AppPaths } from "../types/app.paths";
+import { AppPaths } from "../../types/app.paths";
 
 interface ISignInProps {
   email: string;
@@ -54,7 +54,7 @@ export const SignInForm = () => {
         email: props.email,
         password: props.password,
       }).then(({ data }) => {
-        localStorage.setItem("tasks-app-token", data.token);
+        localStorage.setItem(AppPaths.APP_TOKEN, data.token);
         navigate(AppPaths.HOME);
       });
     } catch (error) {
