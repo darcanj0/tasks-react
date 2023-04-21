@@ -11,7 +11,6 @@ export const DefaultContainer = (props: DefaultContainerProps) => {
     height: "100vh",
     display: "flex",
     flexDirection: "column",
-    border: "1px solid red",
     justifyContent: "space-between",
     padding: "0px 0px 20px 0px",
     gap: "20px",

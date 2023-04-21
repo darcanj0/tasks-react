@@ -12,7 +12,8 @@ export const ContentContainer = (props: ContentContainerProps) => {
     display: "flex",
     background: "#ffffff",
     flexDirection: "column",
-    border: "1px solid blue",
+    alignItems: "center",
+    justifyContent: "center",
   };
 
   return (
