@@ -1,4 +1,5 @@
 export enum AppPaths {
   HOME = "/",
-  SIGN = "/sign",
+  SIGNUP = "/signup",
+  SIGNIN = "/login",
 }

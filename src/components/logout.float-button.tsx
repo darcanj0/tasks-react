@@ -5,9 +5,11 @@ import { AppPaths } from "../types/app.paths";
 
 export const LogoutFloatButton = () => {
   return (
-    <Link to={AppPaths.SIGN}>
+    <Link to={AppPaths.SIGNIN}>
       <Fab
-        onClick={() => console.log("clicked")}
+        onClick={() => {
+          localStorage.removeItem("tasks-app-token");
+        }}
         color="primary"
         aria-label="add"
         sx={{

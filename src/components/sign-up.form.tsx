@@ -56,10 +56,14 @@ export const SignForm = () => {
 
   const signUp = async (props: ISignUpProps) => {
     try {
-      console.log(props);
-      Api.post(ApiPaths.SIGNUP, props).then(({ data }) => {
-        localStorage.setItem("tasks-app-token", data.token);
-        navigate(AppPaths.HOME);
+      Api.post(ApiPaths.SIGNUP, props).then(() => {
+        Api.post(ApiPaths.SIGNIN, {
+          email: props.email,
+          password: props.password,
+        }).then(({ data }) => {
+          localStorage.setItem("tasks-app-token", data.token);
+          navigate(AppPaths.HOME);
+        });
       });
     } catch (error) {
       console.error(error);

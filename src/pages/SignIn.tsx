@@ -1,10 +1,10 @@
-import { SignForm } from "../components/sign.form";
+import { SignInForm } from "../components/sign-in.form";
 import { DefaultContainer } from "../container/default-container";
 
-export const SignPage = () => {
+export const SingInPage = () => {
   return (
     <DefaultContainer>
-      <SignForm></SignForm>
+      <SignInForm />
     </DefaultContainer>
   );
 };
