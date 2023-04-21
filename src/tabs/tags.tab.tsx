@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { AppPaths } from "../types/app.paths";
 import { useNavigate } from "react-router-dom";
 import { CreateTagModal } from "../components/modals/create-tag.modal";
+import { TagCard } from "../components/cards/tag.card";
 
 export interface TagsTabProps {
   openModal: boolean;
@@ -33,6 +34,17 @@ export const TagsTab = ({ openModal, onCloseModal }: TagsTabProps) => {
     alignItems: "center",
   };
 
+  const innerCss: SxProps = {
+    display: "flex",
+    height: "90%",
+    width: "500px",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    overflow: "auto",
+    gap: "20px",
+  };
+
   return tabValue === TabIndexes.TAGS ? (
     <>
       <Modal
@@ -47,7 +59,11 @@ export const TagsTab = ({ openModal, onCloseModal }: TagsTabProps) => {
         <CreateTagModal />
       </Modal>
       <Box sx={css}>
-        <h1>Tags</h1>
+        <Box sx={innerCss}>
+          {myTags.map((tag) => (
+            <TagCard tag={tag} />
+          ))}
+        </Box>
       </Box>
     </>
   ) : (
