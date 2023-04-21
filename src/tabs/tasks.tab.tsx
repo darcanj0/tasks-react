@@ -17,7 +17,6 @@ export const TasksTab = ({ openModal, onCloseModal }: TasksTabProps) => {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    border: "1px solid red",
   };
 
   return tabValue === TabIndexes.TASKS ? (

@@ -15,7 +15,7 @@ const TabContext = createContext<ITabContextProvider>(
 );
 
 const TabContextProvider = (props: ITabContextProviderProps) => {
-  const [tabValue, setTabValue] = useState(0);
+  const [tabValue, setTabValue] = useState(1);
 
   return (
     <TabContext.Provider value={{ tabValue, setTabValue }}>
