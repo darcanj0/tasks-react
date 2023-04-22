@@ -6,6 +6,7 @@ import { TagChip } from "./tag.chip";
 import { Api } from "../../api/axios";
 import { ApiPaths } from "../../types/api.paths";
 import { useTasks } from "../../contexts/tasks.context";
+import { HandleRequestError } from "../../utils/request-error.handler";
 
 export interface TaskCardProps {
   task: Task;
@@ -24,7 +25,7 @@ export const TaskCard = ({ task }: TaskCardProps) => {
         getMyTasks();
       });
     } catch (error) {
-      console.error(error);
+      HandleRequestError(error);
     }
   };
 

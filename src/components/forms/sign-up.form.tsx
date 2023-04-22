@@ -6,6 +6,7 @@ import { Api } from "../../api/axios";
 import { ApiPaths } from "../../types/api.paths";
 import { useNavigate } from "react-router-dom";
 import { AppPaths } from "../../types/app.paths";
+import { HandleRequestError } from "../../utils/request-error.handler";
 
 interface ISignUpProps {
   email: string;
@@ -27,7 +28,7 @@ const signupSchema = yup.object().shape({
     .max(20, "Password is too long"),
 });
 
-export const SignForm = () => {
+export const SignUpForm = () => {
   const outerCss: SxProps = {
     height: "100%",
     width: "100%",
@@ -53,20 +54,19 @@ export const SignForm = () => {
   };
 
   const navigate = useNavigate();
-
   const signUp = async (props: ISignUpProps) => {
     try {
-      Api.post(ApiPaths.SIGNUP, props).then(() => {
-        Api.post(ApiPaths.SIGNIN, {
-          email: props.email,
-          password: props.password,
-        }).then(({ data }) => {
-          localStorage.setItem(AppPaths.APP_TOKEN, data.token);
-          navigate(AppPaths.HOME);
-        });
+      await Api.post(ApiPaths.SIGNUP, props);
+
+      const signInResponse = await Api.post(ApiPaths.SIGNIN, {
+        email: props.email,
+        password: props.password,
       });
-    } catch (error) {
-      console.error(error);
+      localStorage.setItem(AppPaths.APP_TOKEN, signInResponse.data.token);
+      navigate(AppPaths.HOME);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      HandleRequestError(error);
     }
   };
 
@@ -111,8 +111,22 @@ export const SignForm = () => {
           sx={textFieldCss}
         />
 
-        <Button variant="contained" color="success" type="submit">
+        <Button
+          variant="contained"
+          color="success"
+          type="submit"
+          sx={textFieldCss}
+        >
           Sign Up
+        </Button>
+
+        <Button
+          variant="contained"
+          color="error"
+          sx={{ width: "50%" }}
+          onClick={() => navigate(AppPaths.SIGNIN)}
+        >
+          I already have an account
         </Button>
       </Box>
     </Box>

@@ -4,6 +4,7 @@ import { Api } from "../../api/axios";
 import { ApiPaths } from "../../types/api.paths";
 import { useTags } from "../../contexts/tags.context";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { HandleRequestError } from "../../utils/request-error.handler";
 
 export interface TagCardProps {
   tag: Tag;
@@ -18,7 +19,7 @@ export const TagCard = ({ tag }: TagCardProps) => {
         getMyTags();
       });
     } catch (error) {
-      console.error(error);
+      HandleRequestError(error);
     }
   };
 

@@ -1,5 +1,6 @@
 import { Container, SxProps } from "@mui/material";
 import { ReactNode } from "react";
+import { ErrorAlert } from "../components/alerts/error.alert";
 
 interface DefaultContainerProps {
   children: ReactNode;
@@ -19,6 +20,7 @@ export const DefaultContainer = (props: DefaultContainerProps) => {
   return (
     <Container sx={css} maxWidth={false} disableGutters>
       {props.children}
+      <ErrorAlert />
     </Container>
   );
 };

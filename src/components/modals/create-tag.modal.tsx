@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Api } from "../../api/axios";
 import { ApiPaths } from "../../types/api.paths";
 import { useTags } from "../../contexts/tags.context";
+import { HandleRequestError } from "../../utils/request-error.handler";
 
 interface ICreateTagProps {
   title: string;
@@ -47,7 +48,7 @@ export const CreateTagModal = () => {
         getMyTags();
       });
     } catch (error) {
-      console.error(error);
+      HandleRequestError(error);
     }
   };
 

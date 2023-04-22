@@ -18,6 +18,7 @@ import { ApiPaths } from "../../types/api.paths";
 import { useTasks } from "../../contexts/tasks.context";
 import { useTags } from "../../contexts/tags.context";
 import { useState } from "react";
+import { HandleRequestError } from "../../utils/request-error.handler";
 
 interface ICreateTaskProps {
   title: string;
@@ -58,7 +59,7 @@ export const CreateTaskModal = () => {
         getMyTasks();
       });
     } catch (error) {
-      console.error(error);
+      HandleRequestError(error)
     }
   };
 

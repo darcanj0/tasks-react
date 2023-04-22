@@ -6,6 +6,7 @@ import { Api } from "../../api/axios";
 import { ApiPaths } from "../../types/api.paths";
 import { useNavigate } from "react-router-dom";
 import { AppPaths } from "../../types/app.paths";
+import { HandleRequestError } from "../../utils/request-error.handler";
 
 interface ISignInProps {
   email: string;
@@ -48,18 +49,16 @@ export const SignInForm = () => {
 
   const navigate = useNavigate();
 
-  const signUp = async (props: ISignInProps) => {
-    try {
-      Api.post(ApiPaths.SIGNIN, {
-        email: props.email,
-        password: props.password,
-      }).then(({ data }) => {
+  const signIn = async (props: ISignInProps) => {
+    Api.post(ApiPaths.SIGNIN, {
+      email: props.email,
+      password: props.password,
+    })
+      .then(({ data }) => {
         localStorage.setItem(AppPaths.APP_TOKEN, data.token);
         navigate(AppPaths.HOME);
-      });
-    } catch (error) {
-      console.error(error);
-    }
+      })
+      .catch(HandleRequestError);
   };
 
   const {
@@ -72,7 +71,7 @@ export const SignInForm = () => {
 
   return (
     <Box sx={outerCss}>
-      <Box component={"form"} onSubmit={handleSubmit(signUp)} sx={innerCss}>
+      <Box component={"form"} onSubmit={handleSubmit(signIn)} sx={innerCss}>
         <Typography variant="h4">Welcome back!</Typography>
         <TextField
           {...register("email")}
@@ -112,7 +111,12 @@ export const SignInForm = () => {
           >
             Sign In
           </Button>
-          <Button variant="contained" color="error" sx={{ width: "50%" }}>
+          <Button
+            variant="contained"
+            color="error"
+            sx={{ width: "50%" }}
+            onClick={() => navigate(AppPaths.SIGNUP)}
+          >
             New User? Sign Now !
           </Button>
         </Box>

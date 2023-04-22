@@ -4,6 +4,7 @@ import { LogoutFloatButton } from "../components/buttons/logout.float-button";
 import { AddFloatButton } from "../components/buttons/add.float-button";
 import { useTab } from "../contexts/tab.context";
 import { TabIndexes } from "../types/tab-indexes";
+import { ErrorAlert } from "../components/alerts/error.alert";
 
 interface ContentContainerProps {
   children: ReactNode;
@@ -42,6 +43,7 @@ export const ContentContainer = ({
           }
         />
       )}
+      <ErrorAlert />
     </Container>
   );
 };
