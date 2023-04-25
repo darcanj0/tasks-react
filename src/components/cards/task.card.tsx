@@ -19,7 +19,6 @@ export const TaskCard = ({ task }: TaskCardProps) => {
 
   const deleteTask = async (taskId: string) => {
     try {
-      console.log(taskId);
       Api.delete(ApiPaths.DELETE_TASK, {
         data: { tasksIds: [taskId] },
       }).then(() => {

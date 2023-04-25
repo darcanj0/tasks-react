@@ -45,7 +45,7 @@ export const TasksTab = ({ openModal, onCloseModal }: TasksTabProps) => {
   return tabValue === TabIndexes.TASKS ? (
     <>
       <Modal sx={modalCss} open={openModal} onClose={() => onCloseModal()}>
-        <CreateTaskModal />
+        <CreateTaskModal closeModal={onCloseModal} />
       </Modal>
       <Box sx={css}>
         {myTasks.map((task) => (

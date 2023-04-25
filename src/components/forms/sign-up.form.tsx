@@ -57,7 +57,6 @@ export const SignUpForm = () => {
 
   const navigate = useNavigate();
   const signUp = async (props: ISignUpProps) => {
-    console.log(props);
     try {
       await Api.post(ApiPaths.SIGNUP, props);
 

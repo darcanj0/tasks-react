@@ -25,7 +25,11 @@ const createTagSchema = yup.object().shape({
     .max(9, "Hex is too long"),
 });
 
-export const CreateTagModal = () => {
+export interface CreateTagModalProps {
+  closeModal: () => void;
+}
+
+export const CreateTagModal = ({ closeModal }: CreateTagModalProps) => {
   const css: SxProps = {
     width: "500px",
     height: "500px",
@@ -54,6 +58,7 @@ export const CreateTagModal = () => {
           message: ApiFeedbacks.CREATE_TAG,
           open: true,
         });
+        closeModal();
       });
     } catch (error: any) {
       setAlert({

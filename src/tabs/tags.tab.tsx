@@ -54,7 +54,7 @@ export const TagsTab = ({ openModal, onCloseModal }: TagsTabProps) => {
   return tabValue === TabIndexes.TAGS ? (
     <>
       <Modal open={openModal} onClose={() => onCloseModal()} sx={modalCss}>
-        <CreateTagModal />
+        <CreateTagModal closeModal={onCloseModal} />
       </Modal>
       <Box sx={css}>
         <Box sx={innerCss}>

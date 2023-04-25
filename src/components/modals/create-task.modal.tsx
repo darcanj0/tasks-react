@@ -35,7 +35,11 @@ const createTaskSchema = yup.object().shape({
   dueDate: yup.date().optional(),
 });
 
-export const CreateTaskModal = () => {
+export interface CreateTaskModalProps {
+  closeModal: () => void;
+}
+
+export const CreateTaskModal = ({ closeModal }: CreateTaskModalProps) => {
   const css: SxProps = {
     width: "500px",
     height: "500px",
@@ -54,10 +58,9 @@ export const CreateTaskModal = () => {
 
   const { alert, setAlert } = useAlert();
 
-  const createTask = async (props: ICreateTaskProps) => {
+  const createTask = async ({ dueDate, tags, title }: ICreateTaskProps) => {
     try {
-      console.log(props);
-      Api.post(ApiPaths.CREATE_TASK, props).then(() => {
+      Api.post(ApiPaths.CREATE_TASK, { dueDate, tags, title }).then(() => {
         getMyTasks();
         setAlert({
           ...alert,
@@ -65,6 +68,7 @@ export const CreateTaskModal = () => {
           message: ApiFeedbacks.CREATE_TASK,
           open: true,
         });
+        closeModal();
       });
     } catch (error: any) {
       setAlert({
