@@ -1,11 +1,11 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import { Box, Button, SxProps, TextField, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { Api } from "../../api/axios";
-import { ApiPaths } from "../../types/api.paths";
+import { useAlert } from "../../contexts/alert.context";
 import { useTags } from "../../contexts/tags.context";
-import { HandleRequestError } from "../../utils/request-error.handler";
+import { ApiPaths } from "../../types/api.paths";
 
 interface ICreateTagProps {
   title: string;
@@ -42,13 +42,20 @@ export const CreateTagModal = () => {
     color: "white",
   };
 
+  const { alert, setAlert } = useAlert();
+
   const createTag = async (props: ICreateTagProps) => {
     try {
       Api.post(ApiPaths.CREATE_TAG, props).then(() => {
         getMyTags();
       });
-    } catch (error) {
-      HandleRequestError(error);
+    } catch (error: any) {
+      setAlert({
+        ...alert,
+        open: true,
+        message: error.response.data.message as string,
+      });
+      console.error(error);
     }
   };
 

@@ -6,7 +6,7 @@ import { Api } from "../../api/axios";
 import { ApiPaths } from "../../types/api.paths";
 import { useNavigate } from "react-router-dom";
 import { AppPaths } from "../../types/app.paths";
-import { HandleRequestError } from "../../utils/request-error.handler";
+import { useAlert } from "../../contexts/alert.context";
 
 interface ISignInProps {
   email: string;
@@ -49,6 +49,8 @@ export const SignInForm = () => {
 
   const navigate = useNavigate();
 
+  const { alert, setAlert } = useAlert();
+
   const signIn = async (props: ISignInProps) => {
     Api.post(ApiPaths.SIGNIN, {
       email: props.email,
@@ -58,7 +60,14 @@ export const SignInForm = () => {
         localStorage.setItem(AppPaths.APP_TOKEN, data.token);
         navigate(AppPaths.HOME);
       })
-      .catch(HandleRequestError);
+      .catch((error: any) => {
+        setAlert({
+          ...alert,
+          open: true,
+          message: error.response.data.message as string,
+        });
+        console.error(error);
+      });
   };
 
   const {

@@ -6,7 +6,7 @@ import { Api } from "../../api/axios";
 import { ApiPaths } from "../../types/api.paths";
 import { useNavigate } from "react-router-dom";
 import { AppPaths } from "../../types/app.paths";
-import { HandleRequestError } from "../../utils/request-error.handler";
+import { useAlert } from "../../contexts/alert.context";
 
 interface ISignUpProps {
   email: string;
@@ -53,8 +53,11 @@ export const SignUpForm = () => {
     width: "80%",
   };
 
+  const { alert, setAlert } = useAlert();
+
   const navigate = useNavigate();
   const signUp = async (props: ISignUpProps) => {
+    console.log(props);
     try {
       await Api.post(ApiPaths.SIGNUP, props);
 
@@ -66,7 +69,12 @@ export const SignUpForm = () => {
       navigate(AppPaths.HOME);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      HandleRequestError(error);
+      setAlert({
+        ...alert,
+        open: true,
+        message: error.response.data.message as string,
+      });
+      console.error(error);
     }
   };
 

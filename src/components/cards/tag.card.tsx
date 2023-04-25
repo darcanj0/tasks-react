@@ -4,13 +4,15 @@ import { Api } from "../../api/axios";
 import { ApiPaths } from "../../types/api.paths";
 import { useTags } from "../../contexts/tags.context";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { HandleRequestError } from "../../utils/request-error.handler";
+import { useAlert } from "../../contexts/alert.context";
 
 export interface TagCardProps {
   tag: Tag;
 }
 
 export const TagCard = ({ tag }: TagCardProps) => {
+  const { alert, setAlert } = useAlert();
+
   const deleteTag = async (tagId: string) => {
     try {
       Api.delete(ApiPaths.DELETE_TAG, {
@@ -18,8 +20,13 @@ export const TagCard = ({ tag }: TagCardProps) => {
       }).then(() => {
         getMyTags();
       });
-    } catch (error) {
-      HandleRequestError(error);
+    } catch (error: any) {
+      setAlert({
+        ...alert,
+        open: true,
+        message: error.response.data.message as string,
+      });
+      console.error(error);
     }
   };
 

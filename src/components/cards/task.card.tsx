@@ -6,7 +6,7 @@ import { TagChip } from "./tag.chip";
 import { Api } from "../../api/axios";
 import { ApiPaths } from "../../types/api.paths";
 import { useTasks } from "../../contexts/tasks.context";
-import { HandleRequestError } from "../../utils/request-error.handler";
+import { useAlert } from "../../contexts/alert.context";
 
 export interface TaskCardProps {
   task: Task;
@@ -15,6 +15,7 @@ export interface TaskCardProps {
 export const TaskCard = ({ task }: TaskCardProps) => {
   const { myTags } = useTags();
   const { getMyTasks } = useTasks();
+  const { alert, setAlert } = useAlert();
 
   const deleteTask = async (taskId: string) => {
     try {
@@ -24,8 +25,13 @@ export const TaskCard = ({ task }: TaskCardProps) => {
       }).then(() => {
         getMyTasks();
       });
-    } catch (error) {
-      HandleRequestError(error);
+    } catch (error: any) {
+      setAlert({
+        ...alert,
+        open: true,
+        message: error.response.data.message as string,
+      });
+      console.error(error);
     }
   };
 

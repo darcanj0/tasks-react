@@ -1,7 +1,4 @@
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Api } from "../../api/axios";
 import {
   Box,
   Button,
@@ -14,11 +11,14 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { ApiPaths } from "../../types/api.paths";
-import { useTasks } from "../../contexts/tasks.context";
-import { useTags } from "../../contexts/tags.context";
 import { useState } from "react";
-import { HandleRequestError } from "../../utils/request-error.handler";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { Api } from "../../api/axios";
+import { useAlert } from "../../contexts/alert.context";
+import { useTags } from "../../contexts/tags.context";
+import { useTasks } from "../../contexts/tasks.context";
+import { ApiPaths } from "../../types/api.paths";
 
 interface ICreateTaskProps {
   title: string;
@@ -52,14 +52,21 @@ export const CreateTaskModal = () => {
     color: "white",
   };
 
+  const { alert, setAlert } = useAlert();
+
   const createTask = async (props: ICreateTaskProps) => {
     try {
       console.log(props);
       Api.post(ApiPaths.CREATE_TASK, props).then(() => {
         getMyTasks();
       });
-    } catch (error) {
-      HandleRequestError(error)
+    } catch (error: any) {
+      setAlert({
+        ...alert,
+        open: true,
+        message: error.response.data.message as string,
+      });
+      console.error(error);
     }
   };
 
