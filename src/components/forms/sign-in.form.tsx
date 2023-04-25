@@ -3,7 +3,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Box, Button, SxProps, TextField, Typography } from "@mui/material";
 import { Api } from "../../api/axios";
-import { ApiPaths } from "../../types/api.paths";
+import { ApiFeedbacks, ApiPaths } from "../../types/api.paths";
 import { useNavigate } from "react-router-dom";
 import { AppPaths } from "../../types/app.paths";
 import { useAlert } from "../../contexts/alert.context";
@@ -59,12 +59,19 @@ export const SignInForm = () => {
       .then(({ data }) => {
         localStorage.setItem(AppPaths.APP_TOKEN, data.token);
         navigate(AppPaths.HOME);
+        setAlert({
+          ...alert,
+          open: true,
+          message: ApiFeedbacks.SIGNIN,
+          severity: "success",
+        });
       })
       .catch((error: any) => {
         setAlert({
           ...alert,
           open: true,
           message: error.response.data.message as string,
+          severity: "error",
         });
         console.error(error);
       });

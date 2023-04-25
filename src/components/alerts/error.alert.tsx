@@ -17,7 +17,7 @@ export const ErrorAlert = () => {
     >
       <Alert
         onClose={() => setAlert({ ...alert, open: false })}
-        severity="error"
+        severity={alert.severity}
         variant="filled"
         sx={{ width: "100%" }}
       >

@@ -1,7 +1,7 @@
 import { Box, IconButton, Typography } from "@mui/material";
 import { Tag } from "../../types/tag";
 import { Api } from "../../api/axios";
-import { ApiPaths } from "../../types/api.paths";
+import { ApiFeedbacks, ApiPaths } from "../../types/api.paths";
 import { useTags } from "../../contexts/tags.context";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useAlert } from "../../contexts/alert.context";
@@ -19,12 +19,19 @@ export const TagCard = ({ tag }: TagCardProps) => {
         data: { tagsIds: [tagId] },
       }).then(() => {
         getMyTags();
+        setAlert({
+          ...alert,
+          open: true,
+          severity: "success",
+          message: ApiFeedbacks.DELETE_TAG,
+        });
       });
     } catch (error: any) {
       setAlert({
         ...alert,
         open: true,
         message: error.response.data.message as string,
+        severity: "error",
       });
       console.error(error);
     }

@@ -1,3 +1,4 @@
+import { AlertColor } from "@mui/material";
 import { ReactNode, createContext, useContext, useState } from "react";
 
 interface Alert {
@@ -5,6 +6,7 @@ interface Alert {
   vertical: string;
   horizontal: string;
   message: string;
+  severity: AlertColor;
 }
 
 interface IAlertContextProvider {
@@ -21,11 +23,12 @@ const AlertContext = createContext<IAlertContextProvider>(
 );
 
 const AlertContextProvider = (props: IAlertContextProviderProps) => {
-  const [alert, setAlert] = useState({
+  const [alert, setAlert] = useState<Alert>({
     open: false,
     vertical: "top",
     horizontal: "right",
     message: "",
+    severity: "error",
   });
 
   return (

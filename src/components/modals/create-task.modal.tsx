@@ -18,7 +18,7 @@ import { Api } from "../../api/axios";
 import { useAlert } from "../../contexts/alert.context";
 import { useTags } from "../../contexts/tags.context";
 import { useTasks } from "../../contexts/tasks.context";
-import { ApiPaths } from "../../types/api.paths";
+import { ApiFeedbacks, ApiPaths } from "../../types/api.paths";
 
 interface ICreateTaskProps {
   title: string;
@@ -59,12 +59,19 @@ export const CreateTaskModal = () => {
       console.log(props);
       Api.post(ApiPaths.CREATE_TASK, props).then(() => {
         getMyTasks();
+        setAlert({
+          ...alert,
+          severity: "success",
+          message: ApiFeedbacks.CREATE_TASK,
+          open: true,
+        });
       });
     } catch (error: any) {
       setAlert({
         ...alert,
         open: true,
         message: error.response.data.message as string,
+        severity: "error",
       });
       console.error(error);
     }

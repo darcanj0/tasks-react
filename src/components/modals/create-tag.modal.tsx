@@ -5,7 +5,7 @@ import * as yup from "yup";
 import { Api } from "../../api/axios";
 import { useAlert } from "../../contexts/alert.context";
 import { useTags } from "../../contexts/tags.context";
-import { ApiPaths } from "../../types/api.paths";
+import { ApiFeedbacks, ApiPaths } from "../../types/api.paths";
 
 interface ICreateTagProps {
   title: string;
@@ -48,12 +48,19 @@ export const CreateTagModal = () => {
     try {
       Api.post(ApiPaths.CREATE_TAG, props).then(() => {
         getMyTags();
+        setAlert({
+          ...alert,
+          severity: "success",
+          message: ApiFeedbacks.CREATE_TAG,
+          open: true,
+        });
       });
     } catch (error: any) {
       setAlert({
         ...alert,
         open: true,
         message: error.response.data.message as string,
+        severity: "error",
       });
       console.error(error);
     }
