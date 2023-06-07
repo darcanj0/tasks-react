@@ -23,7 +23,7 @@ export const TasksTab = ({ openModal, onCloseModal }: TasksTabProps) => {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    gap: "20px",
+    gap: "40px",
   };
 
   const modalCss: SxProps = {

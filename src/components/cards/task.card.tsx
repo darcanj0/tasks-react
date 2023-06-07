@@ -50,8 +50,9 @@ export const TaskCard = ({ task }: TaskCardProps) => {
         display: "flex",
         justifyContent: "space-between",
         borderRadius: "10px",
-        border: "2px solid black",
+        boxShadow: "34px 34px 68px #bfbfc3, -34px -34px 68px #ffffff",
         padding: "0 15px",
+        background: "#e1e1e5",
       }}
     >
       <Typography

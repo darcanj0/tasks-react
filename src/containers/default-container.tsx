@@ -15,6 +15,7 @@ export const DefaultContainer = (props: DefaultContainerProps) => {
     justifyContent: "space-between",
     padding: "0px 0px 20px 0px",
     gap: "20px",
+    backgroundColor: "#e1e1e5"
   };
 
   return (

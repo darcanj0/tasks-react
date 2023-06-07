@@ -14,6 +14,7 @@ export const BottomNav = () => {
       onChange={(_, newValue) => {
         setTabValue(newValue);
       }}
+      style={{background: "#e1e1e5"}}
     >
       <BottomNavigationAction label="Tasks" icon={<AssignmentIcon />} />
       <BottomNavigationAction label="Tags" icon={<BookmarksIcon />} />

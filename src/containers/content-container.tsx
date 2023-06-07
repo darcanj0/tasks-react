@@ -23,7 +23,7 @@ export const ContentContainer = ({
     width: "100%",
     height: "100%",
     display: "flex",
-    background: "#ffffff",
+    background: "#e1e1e5",
     alignItems: "center",
     justifyContent: "center",
   };
